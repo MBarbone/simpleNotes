@@ -1,4 +1,5 @@
 const fs = require("fs");
+
 const getNotes = () => {
   return "Your notes...";
 };
@@ -17,6 +18,16 @@ const addNote = (title, body) => {
   saveNotes(notes);
 };
 
+const removeNote = (title, body) => {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter(note => {
+    return note.title !== title;
+  });
+
+  saveNotes(notesToKeep);
+  console.log(`Note: '${title}' successfully removed!`);
+};
+
 const saveNotes = notes => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
@@ -32,4 +43,8 @@ const loadNotes = () => {
   }
 };
 
-module.exports = { getNotes: getNotes, addNote: addNote };
+module.exports = {
+  getNotes: getNotes,
+  addNote: addNote,
+  removeNote: removeNote
+};
