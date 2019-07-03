@@ -40,7 +40,7 @@ yargs.command({
   },
   showInHelp: true,
   handler(argv) {
-    notes.removeNote(argv.title);
+    notes.removeNote();
   }
 });
 
@@ -48,15 +48,8 @@ yargs.command({
   command: "list",
   describe: "List all notes",
   showInHelp: true,
-  builder: {
-    title: {
-      describe: "Note Title",
-      demandOption: true,
-      type: "string"
-    }
-  },
   handler() {
-    console.log("Listing notes!");
+    notes.listNotes();
   }
 });
 
